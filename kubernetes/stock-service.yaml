@@ -20,7 +20,7 @@ spec:
             - containerPort: 8000
           env:
             - name: KAFKA_ADDRESS
-              value: "http://broker:19092"
+              value: "broker:19092"
 ---
 apiVersion: v1
 kind: Service
