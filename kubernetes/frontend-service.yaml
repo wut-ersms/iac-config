@@ -1,0 +1,61 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend-service
+  template:
+    metadata:
+      labels:
+        app: frontend-service
+    spec:
+      containers:
+        - name: frontend-service
+          image: pploski060/ersms-front-end
+          ports:
+            - containerPort: 5000
+          env:
+            - name: FLASK_ENV
+              value: "DEV"
+            - name: FLASK_RUN_PORT
+              value: "5000"
+            - name: FLASK_RUN_HOST
+              value: "0.0.0.0"
+            - name: FLASK_SECRET_KEY
+              value: "tajny_sekret"
+            - name: DEBUG
+              value: "True"
+            - name: MAIN_SERVICE_URL
+              value: "http://main-service:8091"
+            - name: GOOGLE_OAUTH_CLIENT_ID
+              value: "abc123xyz.apps.googleusercontent.com"
+            - name: GOOGLE_OAUTH_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: frontend-secrets
+                  key: GOOGLE_OAUTH_CLIENT_SECRET
+            - name: OAUTHLIB_INSECURE_TRANSPORT
+              value: "0"
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: frontend-secrets
+type: Opaque
+stringData:
+  GOOGLE_OAUTH_CLIENT_SECRET: "yourgoogleclientsecret"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-service
+spec:
+  selector:
+    app: frontend-service
+  ports:
+    - port: 80
+      targetPort: 5000

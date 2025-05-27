@@ -1,0 +1,36 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: main-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: main-service
+  template:
+    metadata:
+      labels:
+        app: main-service
+    spec:
+      containers:
+        - name: main-service
+          image: dtomala/ersms-main-service
+          ports:
+            - containerPort: 8091
+          env:
+            - name: KAFKA_ADDRESS
+              value: "http://broker:19092"
+            - name: STOCK_SERVICE_ADDRESS
+              value: "http://stock-service:8000/stocks"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: main-service
+spec:
+  selector:
+    app: main-service
+  ports:
+    - port: 8091
+      targetPort: 8091
