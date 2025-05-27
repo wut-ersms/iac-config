@@ -46,11 +46,8 @@ module "gke" {
   ]
 }
 
-module "load_balancer" {
-  source            = "./modules/load-balancer"
+module "ingress" {
+  source            = "./modules/ingress"
   project_id        = var.project_id
-  name              = "https-lb"
   domain_name       = var.domain_name
-  instance_group    = module.gke.instance_group_urls[0]
-  health_check_port = 30080
 }
