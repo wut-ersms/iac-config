@@ -41,7 +41,13 @@ resource "google_container_cluster" "cluster" {
   }
 
   master_authorized_networks_config {
-    cidr_blocks = var.master_authorized_networks
+    dynamic "cidr_blocks" {
+      for_each = var.master_authorized_networks
+      content {
+        cidr_block   = cidr_blocks.value.cidr_block
+        display_name = cidr_blocks.value.display_name
+      }
+    }
   }
 
   release_channel {
@@ -76,5 +82,4 @@ resource "google_service_networking_connection" "private_vpc_connection" {
   network                 = var.network
   service                 = "servicenetworking.googleapis.com"
   reserved_peering_ranges = [var.peering_range]
-  # project                 = var.project_id
 }
