@@ -1,6 +1,6 @@
 terraform {
   backend "gcs" {
-    bucket = var.tf_state_bucket
+    bucket = "ersms-460608-tf-state"
     prefix = "terraform/state"
   }
 }
