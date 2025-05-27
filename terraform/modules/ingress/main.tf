@@ -4,7 +4,7 @@ resource "google_compute_global_address" "ingress_ip" {
   ip_version = "IPV4"
 }
 
-resource "google_compute_managed_ssl_certificate" "domain_cert" {
+resource "google_certificate_manager_certificate" "domain_cert" {
   name    = "domain-cert"
   project = var.project_id
 
