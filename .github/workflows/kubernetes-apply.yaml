@@ -25,6 +25,8 @@ jobs:
 
       - name: Set up Google Cloud SDK
         uses: google-github-actions/setup-gcloud@v2
+        with:
+          install_components: "gke-gcloud-auth-plugin"
 
       - name: Set use_application_default_credentials to true
         run: gcloud config set container/use_application_default_credentials true
