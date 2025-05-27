@@ -7,7 +7,7 @@ on:
 jobs:
   kubernetes-apply:
     if: github.ref == 'refs/heads/master'
-    name: Terraform Apply
+    name: Apply K8S Manifests
     runs-on: ubuntu-latest
     permissions:
       id-token: write
@@ -24,7 +24,7 @@ jobs:
           service_account: ${{ secrets.GCP_SA_EMAIL }}
 
       - name: Set up Google Cloud SDK
-        uses: google-github-actions/setup-gcloud@v1
+        uses: google-github-actions/setup-gcloud@v2
 
       - name: Set use_application_default_credentials to true
         run: gcloud config set container/use_application_default_credentials true
