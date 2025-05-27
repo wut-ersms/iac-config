@@ -10,6 +10,16 @@ resource "google_compute_subnetwork" "subnet" {
   region        = var.region
   network       = google_compute_network.vpc.id
   project       = var.project_id
+
+  secondary_ip_range {
+    range_name    = "gke-pods-range"
+    ip_cidr_range = "10.10.0.0/16"
+  }
+
+  secondary_ip_range {
+    range_name    = "gke-services-range"
+    ip_cidr_range = "10.20.0.0/20"
+  }
 }
 
 resource "google_compute_router" "router" {
