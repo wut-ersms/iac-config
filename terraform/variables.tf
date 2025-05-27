@@ -17,3 +17,8 @@ variable "domain_name" {
   type        = string
   description = "FQDN for the HTTPS load balancer (e.g. app.example.com)"
 }
+
+variable "tf_state_bucket" {
+  type        = string
+  description = "Bucket used to keep tf state"
+}
