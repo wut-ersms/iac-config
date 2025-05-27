@@ -24,6 +24,6 @@ resource "google_certificate_manager_certificate_map_entry" "cert_map_entry" {
   project  = var.project_id
   hostname = var.domain_name
   certificates = [
-    google_certificate_manager_certificate.domain_cert.name
+    google_certificate_manager_certificate.domain_cert.id
   ]
 }
