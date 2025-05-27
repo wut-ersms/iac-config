@@ -37,7 +37,6 @@ module "gke" {
   peering_range                  = google_compute_global_address.gke_pods_range.name
   node_count                     = 1
   machine_type                   = "e2-standard-4"
-  node_service_account           = var.node_sa_email
 
   master_authorized_networks = [
     {

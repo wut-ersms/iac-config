@@ -47,7 +47,6 @@ variable "node_count" {
 variable "machine_type" {
   description = "GCE machine type"
   type        = string
-  default     = "e2-medium"
 }
 
 variable "master_authorized_networks" {
