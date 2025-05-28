@@ -32,14 +32,14 @@ spec:
             - name: MAIN_SERVICE_URL
               value: "http://main-service:8091"
             - name: GOOGLE_OAUTH_CLIENT_ID
-              value: "abc123xyz.apps.googleusercontent.com"
+              value: "610099740831-hcb4vtb3p1s7foh2sumoevmn07lhfp4t.apps.googleusercontent.com"
             - name: GOOGLE_OAUTH_CLIENT_SECRET
               valueFrom:
                 secretKeyRef:
                   name: frontend-secrets
                   key: GOOGLE_OAUTH_CLIENT_SECRET
             - name: OAUTHLIB_INSECURE_TRANSPORT
-              value: "0"
+              value: "1"
 ---
 apiVersion: v1
 kind: Secret
@@ -47,7 +47,7 @@ metadata:
   name: frontend-secrets
 type: Opaque
 stringData:
-  GOOGLE_OAUTH_CLIENT_SECRET: "yourgoogleclientsecret"
+  GOOGLE_OAUTH_CLIENT_SECRET: "${{ secrets.GOOGLE_OAUTH_CLIENT_SECRET }}"
 ---
 apiVersion: v1
 kind: Service
