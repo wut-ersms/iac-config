@@ -7,7 +7,7 @@ metadata:
     kubernetes.io/ingress.class: "gce"
 spec:
   rules:
-    - host: ersms.stawarski.xyz
+    - host: 35.190.6.95
       http:
         paths:
           - path: /
